@@ -152,3 +152,7 @@ struct EVChargingView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+
+
+//ggewdgigkfwekudhygiyweftyidgiwegftdy
