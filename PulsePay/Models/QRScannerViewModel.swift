@@ -29,7 +29,7 @@ final class QRScannerViewModel: NSObject,
         monitorBrightness()
     }
 
-    // MARK: - Camera Setup (BACKGROUND)
+    // MARK: - Camera Setup (BACKGROUND THREAD)
     private func configureSession() {
         session.beginConfiguration()
 
@@ -130,9 +130,9 @@ final class QRScannerViewModel: NSObject,
         }
     }
 
-    // MARK: - QR Detection
+    // MARK: - QR DETECTION (✅ FIXED SIGNATURE)
     func metadataOutput(
-       ighth Output: AVCaptureMetadataOutput,
+        _ output: AVCaptureMetadataOutput,
         didOutput metadataObjects: [AVMetadataObject],
         from connection: AVCaptureConnection
     ) {
@@ -146,18 +146,23 @@ final class QRScannerViewModel: NSObject,
         triggerSuccess()
     }
 
-    // MARK: - Success Feedback
+    // MARK: - SUCCESS FEEDBACK (VIBRATION + SOUND)
     private func triggerSuccess() {
         stopScanning()
 
         DispatchQueue.main.async {
             self.showSuccess = true
 
-            // 🔔 Haptic
-            let feedback = UINotificationFeedbackGenerator()
-            feedback.notificationOccurred(.success)
+            // ✅ GUARANTEED HAPTIC
+            let notification = UINotificationFeedbackGenerator()
+            notification.prepare()
+            notification.notificationOccurred(.success)
 
-            // 🔊 System success sound
+            let impact = UIImpactFeedbackGenerator(style: .medium)
+            impact.prepare()
+            impact.impactOccurred()
+
+            // 🔊 System sound (may respect silent mode)
             AudioServicesPlaySystemSound(1057)
         }
 

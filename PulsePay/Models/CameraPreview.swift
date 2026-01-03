@@ -12,12 +12,9 @@ struct CameraPreview: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // No-op
-    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
-// MARK: - Custom UIView (Correct Way)
 final class PreviewView: UIView {
 
     override class var layerClass: AnyClass {
@@ -30,7 +27,6 @@ final class PreviewView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        videoPreviewLayer.frame = bounds   // ✅ Context-aware sizing
+        videoPreviewLayer.frame = bounds
     }
 }
-

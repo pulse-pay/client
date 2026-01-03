@@ -1,9 +1,3 @@
-//
-//  ScanSuccessOverlay.swift
-//  PulsePay
-//
-//  Created by Anindya Mukhopadhyay on 04/01/26.
-//
 import SwiftUI
 
 struct ScanSuccessOverlay: View {
@@ -41,4 +35,3 @@ struct ScanSuccessOverlay: View {
         }
     }
 }
-
