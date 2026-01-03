@@ -10,138 +10,116 @@ struct EVChargingView: View {
                 .ignoresSafeArea()
 
             ScrollView {
-                VStack(spacing: 24) {
+                VStack(spacing: 28) {
 
                     // ⚡ HEADER
                     VStack(spacing: 10) {
-                        Image(systemName: "bolt.car.fill")
-                            .font(.system(size: 56))
-                            .foregroundColor(AppColors.positive)
+                        Image("EV")                 // 👈 EV.png from Assets
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 250, height: 250)
 
                         Text("EV Charging")
                             .font(.largeTitle.bold())
                             .foregroundColor(AppColors.textOnDark)
 
-                        Text("Pay per second · Transparent billing")
+                        Text("All your EV charging needs in one place")
                             .font(.caption)
                             .foregroundColor(AppColors.textMutedOnDark)
                     }
                     .padding(.top, 20)
 
-                    // 🔋 CURRENT STATUS (STATIC)
-                    VStack(alignment: .leading, spacing: 12) {
+                    // 🚀 PRIMARY ACTIONS
+                    VStack(spacing: 16) {
 
-                        HStack {
-                            Text("Current Status")
-                                .font(.headline)
-                                .foregroundColor(AppColors.textOnDark)
+                        actionCard(
+                            icon: "qrcode.viewfinder",
+                            title: "Scan EV QR",
+                            subtitle: "Scan QR code at charging station"
+                        )
 
-                            Spacer()
+                        actionCard(
+                            icon: "doc.text.fill",
+                            title: "Pay EV Bill",
+                            subtitle: "Enter charging bill details"
+                        )
 
-                            Text("INACTIVE")
-                                .font(.caption.bold())
-                                .foregroundColor(.yellow)
-                        }
-
-                        Text("₹ 0.00 / sec")
-                            .font(.title2.bold())
-                            .foregroundColor(AppColors.textOnDark)
-
-                        Text("Connect to a charger to start billing")
-                            .font(.caption)
-                            .foregroundColor(AppColors.textMutedOnDark)
+                        actionCard(
+                            icon: "clock.arrow.circlepath",
+                            title: "EV Bill History",
+                            subtitle: "View past EV charging payments"
+                        )
                     }
-                    .padding()
-                    .background(Color.white.opacity(0.06))
-                    .cornerRadius(20)
 
-                    // 📍 NEARBY EV STATIONS (STATIC)
+                    // 📍 DISCOVERY & UTILITIES
                     VStack(alignment: .leading, spacing: 14) {
 
-                        Text("Nearby Charging Stations")
+                        Text("Discover EV Services")
                             .font(.headline)
                             .foregroundColor(AppColors.textOnDark)
 
-                        VStack(spacing: 10) {
-                            HStack {
-                                Text("Tata Power EV Station")
-                                    .foregroundColor(AppColors.textOnDark)
-                                Spacer()
-                                Text("0.8 km · Available")
-                                    .font(.caption)
-                                    .foregroundColor(AppColors.positive)
-                            }
+                        VStack(spacing: 12) {
 
-                            HStack {
-                                Text("Ather Grid")
-                                    .foregroundColor(AppColors.textOnDark)
-                                Spacer()
-                                Text("1.5 km · Busy")
-                                    .font(.caption)
-                                    .foregroundColor(.yellow)
-                            }
+                            utilityRow(
+                                title: "Nearby EV Charging",
+                                subtitle: "Find charging stations around you"
+                            )
 
-                            HStack {
-                                Text("ChargeZone")
-                                    .foregroundColor(AppColors.textOnDark)
-                                Spacer()
-                                Text("2.1 km · Available")
-                                    .font(.caption)
-                                    .foregroundColor(AppColors.positive)
-                            }
+                            utilityRow(
+                                title: "Available Chargers",
+                                subtitle: "Check charger availability status"
+                            )
+
+                            utilityRow(
+                                title: "Charging Rates",
+                                subtitle: "View per-unit & per-minute rates"
+                            )
+
+                            utilityRow(
+                                title: "Supported Networks",
+                                subtitle: "Tata Power, Ather, ChargeZone & more"
+                            )
                         }
                         .padding()
                         .background(Color.white.opacity(0.05))
                         .cornerRadius(16)
                     }
 
-                    // 🧾 RECENT EV BILLS (STATIC)
+                    // 🧾 RECENT EV BILLS (PREVIEW)
                     VStack(alignment: .leading, spacing: 14) {
 
-                        Text("Recent Charging Sessions")
+                        Text("Recent EV Bills")
                             .font(.headline)
                             .foregroundColor(AppColors.textOnDark)
 
                         VStack(spacing: 10) {
-                            HStack {
-                                Text("Tata Power EV · 12 mins")
-                                    .foregroundColor(AppColors.textOnDark)
-                                Spacer()
-                                Text("₹36.50")
-                                    .foregroundColor(AppColors.textOnDark)
-                            }
-
-                            HStack {
-                                Text("Ather Grid · 8 mins")
-                                    .foregroundColor(AppColors.textOnDark)
-                                Spacer()
-                                Text("₹22.40")
-                                    .foregroundColor(AppColors.textOnDark)
-                            }
+                            billRow(name: "Tata Power EV", amount: "₹320.00")
+                            billRow(name: "Ather Grid", amount: "₹180.50")
+                            billRow(name: "ChargeZone", amount: "₹96.20")
                         }
                         .padding()
                         .background(Color.white.opacity(0.05))
                         .cornerRadius(16)
                     }
 
-                    // ℹ️ BILLING INFO (STATIC)
+                    // ℹ️ INFO / TRUST
                     VStack(alignment: .leading, spacing: 8) {
 
-                        Text("Billing Information")
+                        Text("How EV charging works")
                             .font(.headline)
                             .foregroundColor(AppColors.textOnDark)
 
                         Text("""
-• Charges are calculated per second
-• No hidden or idle fees
-• Billing stops automatically on disconnect
-""")
+                            • Discover nearby EV chargers
+                            • Scan QR or pay bill manually
+                            • Transparent, digital EV billing
+                            """)
                         .font(.caption)
                         .foregroundColor(AppColors.textMutedOnDark)
                     }
                     .padding()
                     .background(Color.white.opacity(0.05))
-                    .cornerRadius(16)
+                    .cornerRadius(20)
 
                     Spacer(minLength: 40)
                 }
@@ -151,5 +129,58 @@ struct EVChargingView: View {
         .navigationTitle("EV Charging")
         .navigationBarTitleDisplayMode(.inline)
     }
-}
 
+    // MARK: - INLINE STATIC UI COMPONENTS
+
+    private func actionCard(icon: String, title: String, subtitle: String) -> some View {
+        HStack(spacing: 14) {
+
+            Image(systemName: icon)
+                .font(.system(size: 24))
+                .foregroundColor(AppColors.positive)
+                .frame(width: 48, height: 48)
+                .background(Color.white.opacity(0.08))
+                .cornerRadius(14)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(AppColors.textOnDark)
+
+                Text(subtitle)
+                    .font(.caption)
+                    .foregroundColor(AppColors.textMutedOnDark)
+            }
+
+            Spacer()
+        }
+        .padding()
+        .background(Color.white.opacity(0.06))
+        .cornerRadius(18)
+    }
+
+    private func utilityRow(title: String, subtitle: String) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .foregroundColor(AppColors.textOnDark)
+                Text(subtitle)
+                    .font(.caption)
+                    .foregroundColor(AppColors.textMutedOnDark)
+            }
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(AppColors.textMutedOnDark)
+        }
+    }
+
+    private func billRow(name: String, amount: String) -> some View {
+        HStack {
+            Text(name)
+                .foregroundColor(AppColors.textOnDark)
+            Spacer()
+            Text(amount)
+                .foregroundColor(AppColors.textOnDark)
+        }
+    }
+}
