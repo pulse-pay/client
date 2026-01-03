@@ -10,6 +10,11 @@ import SwiftUI
 struct UsageSettlementView: View {
 
     let items: [DashboardItem]
+    @State private var isExpanded = false
+
+    private var displayedItems: [DashboardItem] {
+        isExpanded ? items : Array(items.prefix(4))
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -21,15 +26,29 @@ struct UsageSettlementView: View {
 
                 Spacer()
 
-                Text("View All")
-                    .foregroundColor(.purple)
+                if items.count > 4 {
+                    Button {
+                        withAnimation(.easeInOut) {
+                            isExpanded.toggle()
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text(isExpanded ? "View Less" : "View All")
+                                .foregroundColor(.purple)
+                            Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                                .font(.caption)
+                                .foregroundColor(.purple)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                }
             }
 
             LazyVGrid(
                 columns: Array(repeating: .init(.flexible()), count: 4),
                 spacing: 16
             ) {
-                ForEach(items) { item in
+                ForEach(displayedItems) { item in
                     NavigationLink {
                         UsageSettlementRouter.destinationView(for: item)
                     } label: {
@@ -38,6 +57,7 @@ struct UsageSettlementView: View {
                     .buttonStyle(.plain)
                 }
             }
+            .animation(.easeInOut, value: isExpanded)
         }
     }
 }

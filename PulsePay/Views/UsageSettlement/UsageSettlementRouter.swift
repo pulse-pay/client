@@ -13,6 +13,20 @@ struct UsageSettlementRouter {
             SessionHistoryView()
         case "Auto Settlement":
             AutoSettlementView()
+
+        // New options
+        case "Billing Summary":
+            BillingSummaryView()
+        case "Invoices & Receipts":
+            InvoicesReceiptsView()
+        case "Pending Dues":
+            PendingDuesView()
+        case "Payment Methods":
+            // Uses the existing PaymentMethodsView in your project
+            PaymentMethodsView()
+        case "Spending Limits":
+            SpendingLimitsView()
+
         default:
             EmptyView()
         }

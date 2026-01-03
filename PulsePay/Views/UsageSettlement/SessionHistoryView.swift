@@ -1,32 +1,48 @@
-//
-//  SessionHistoryView.swift
-//  PulsePay
-//
-//  Created by Anindya Mukhopadhyay on 01/01/26.
-//
-
 import SwiftUI
 
 struct SessionHistoryView: View {
+
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
 
-            VStack(spacing: 20) {
-                Image(systemName: "clock.arrow.circlepath")
-                    .font(.system(size: 64))
-                    .foregroundColor(.orange)
+            AppColors.darkBG.ignoresSafeArea()
 
-                Text("Session History")
-                    .font(.largeTitle.bold())
-                    .foregroundColor(.white)
+            ScrollView {
+                VStack(spacing: 18) {
 
-                Text("Past streaming sessions will be listed here")
-                    .font(.caption)
-                    .foregroundColor(.gray)
+                    Text("Session History")
+                        .font(.largeTitle.bold())
+                        .foregroundColor(AppColors.textOnDark)
+                        .padding(.top)
+
+                    historyRow("EV Charging", "12 min", "- ₹36.40")
+                    historyRow("Public WiFi", "1.2 GB", "- ₹18.00")
+                    historyRow("Parking", "45 min", "- ₹60.00")
+
+                    Spacer()
+                }
+                .padding()
             }
         }
         .navigationTitle("Session History")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func historyRow(_ service: String, _ usage: String, _ amount: String) -> some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(service)
+                    .foregroundColor(AppColors.textOnDark)
+                Text(usage)
+                    .font(.caption)
+                    .foregroundColor(AppColors.textMutedOnDark)
+            }
+            Spacer()
+            Text(amount)
+                .foregroundColor(.red)
+        }
+        .padding()
+        .background(Color.white.opacity(0.05))
+        .cornerRadius(16)
     }
 }
