@@ -3,79 +3,119 @@ import SwiftUI
 struct ProfileView: View {
 
     var body: some View {
-        ZStack {
+        NavigationStack {
+            ZStack {
 
-            // 🖤 DARK BACKGROUND
-            AppColors.darkBG
-                .ignoresSafeArea()
+                // 🖤 DARK BACKGROUND
+                AppColors.darkBG
+                    .ignoresSafeArea()
 
-            ScrollView(showsIndicators: true) {
-                VStack(spacing: 28) {
+                ScrollView(showsIndicators: true) {
+                    VStack(spacing: 28) {
 
-                    // 👤 PROFILE HEADER
-                    VStack(spacing: 12) {
-                        ZStack {
-                            Circle()
-                                .fill(AppColors.darkBG)
+                        // 👤 PROFILE HEADER
+                        VStack(spacing: 12) {
+                            ZStack {
+                                Circle()
+                                    .fill(AppColors.darkBG)
 
-                            Circle()
-                                .fill(Color.white.opacity(0.08))
+                                Circle()
+                                    .fill(Color.white.opacity(0.08))
 
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 42))
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 42))
+                                    .foregroundColor(AppColors.textOnDark)
+                            }
+                            .frame(width: 90, height: 90)
+
+                            Text("Anindya")
+                                .font(.title2.bold())
                                 .foregroundColor(AppColors.textOnDark)
+
+                            Text("anindya@pulsepay.app")
+                                .font(.caption)
+                                .foregroundColor(AppColors.textMutedOnDark)
                         }
-                        .frame(width: 90, height: 90)
+                        .padding(.top, 20)
 
-                        Text("Anindya")
-                            .font(.title2.bold())
-                            .foregroundColor(AppColors.textOnDark)
+                        // 📋 PROFILE OPTIONS
+                        VStack(spacing: 16) {
+                            NavigationLink {
+                                PersonalInformationView()
+                            } label: {
+                                ProfileRow(icon: "person.circle", title: "Personal Information")
+                                    .contentShape(Rectangle())
+                            }
 
-                        Text("anindya@pulsepay.app")
-                            .font(.caption)
-                            .foregroundColor(AppColors.textMutedOnDark)
-                    }
-                    .padding(.top, 20)
+                            NavigationLink {
+                                SecurityPrivacyView()
+                            } label: {
+                                ProfileRow(icon: "lock.circle", title: "Security & Privacy")
+                                    .contentShape(Rectangle())
+                            }
 
-                    // 📋 PROFILE OPTIONS
-                    VStack(spacing: 16) {
-                        ProfileRow(icon: "person.circle", title: "Personal Information")
-                        ProfileRow(icon: "lock.circle", title: "Security & Privacy")
-                        ProfileRow(icon: "bell.circle", title: "Notifications")
-                        ProfileRow(icon: "creditcard.circle", title: "Payment Methods")
-                        ProfileRow(icon: "gearshape.circle", title: "Settings")
-                        ProfileRow(icon: "questionmark.circle", title: "Help & Support")
-                    }
-                    .padding()
-                    .background(Color.white.opacity(0.06))
-                    .cornerRadius(20)
+                            NavigationLink {
+                                NotificationsView()
+                            } label: {
+                                ProfileRow(icon: "bell.circle", title: "Notifications")
+                                    .contentShape(Rectangle())
+                            }
 
-                    // 🚪 LOGOUT SECTION (NOW CLEAR & VISIBLE)
-                    VStack(spacing: 12) {
-                        Button {
-                            // logout logic later
-                        } label: {
-                            Text("Log Out")
-                                .font(.headline)
-                                .foregroundColor(AppColors.negative)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.white.opacity(0.08))
-                                .cornerRadius(16)
+                            NavigationLink {
+                                PaymentMethodsView()
+                            } label: {
+                                ProfileRow(icon: "creditcard.circle", title: "Payment Methods")
+                                    .contentShape(Rectangle())
+                            }
+
+                            NavigationLink {
+                                SettingsView()
+                            } label: {
+                                ProfileRow(icon: "gearshape.circle", title: "Settings")
+                                    .contentShape(Rectangle())
+                            }
+
+                            NavigationLink {
+                                HelpSupportView()
+                            } label: {
+                                ProfileRow(icon: "questionmark.circle", title: "Help & Support")
+                                    .contentShape(Rectangle())
+                            }
                         }
+                        .buttonStyle(.plain)
+                        .padding()
+                        .background(Color.white.opacity(0.06))
+                        .cornerRadius(20)
 
-                        Text("You will need to log in again to access PulsePay.")
-                            .font(.caption)
-                            .foregroundColor(AppColors.textMutedOnDark)
+                        // 🚪 LOGOUT SECTION (NOW CLEAR & VISIBLE)
+                        VStack(spacing: 12) {
+                            Button {
+                                // logout logic later
+                            } label: {
+                                Text("Log Out")
+                                    .font(.headline)
+                                    .foregroundColor(AppColors.negative)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.white.opacity(0.08))
+                                    .cornerRadius(16)
+                            }
+
+                            Text("You will need to log in again to access PulsePay.")
+                                .font(.caption)
+                                .foregroundColor(AppColors.textMutedOnDark)
+                        }
+                        .padding(.top, 8)
+
+                        // ⬇️ EXTRA SPACE FOR SCROLL FEEL
+                        Spacer(minLength: 40)
                     }
-                    .padding(.top, 8)
-
-                    // ⬇️ EXTRA SPACE FOR SCROLL FEEL
-                    Spacer(minLength: 40)
+                    .padding(.horizontal)
+                    .padding(.bottom, 30) // 👈 allows scroll bounce & visibility
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 30) // 👈 allows scroll bounce & visibility
             }
+            .navigationTitle("Profile")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
