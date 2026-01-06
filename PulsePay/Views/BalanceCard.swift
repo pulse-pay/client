@@ -37,16 +37,17 @@ struct BalanceCard: View {
                 .font(.caption)
                 .foregroundColor(AppColors.textMutedOnDark)
 
-            // 🔹 PAYMENT ACTION
+            // 🔹 ADD MONEY ACTION
             HStack {
+
                 Button {
-                    // 🚀 Payment action (API later)
+                    // 🚀 Add money action (API later)
                 } label: {
                     HStack(spacing: 6) {
-                        Image(systemName: "paperplane.fill")
+                        Image(systemName: "plus.circle.fill")
                             .font(.system(size: 12))
 
-                        Text("Pay")
+                        Text("Add Money")
                             .font(.caption.bold())
                     }
                     .foregroundColor(.black)
