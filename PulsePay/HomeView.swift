@@ -9,7 +9,9 @@ struct HomeView: View {
         DashboardItem(title: "EV Charging", icon: "bolt.car.fill"),
         DashboardItem(title: "Public WiFi", icon: "wifi"),
         DashboardItem(title: "Smart Parking", icon: "parkingsign.circle.fill"),
-        DashboardItem(title: "Work Pods", icon: "building.2.fill")
+        DashboardItem(title: "GYM", icon: "dumbbell.fill")
+        
+        
     ]
 
     // MARK: - Usage & Settlement
@@ -53,6 +55,10 @@ struct HomeView: View {
 
                         Color.clear.frame(height: 100)
 
+                        // 🤍 CORE METRIC CARD
+                        BalanceCard()
+                            .background(AppColors.cardWhite)
+                            .cornerRadius(24)
                         // 🤍 CORE METRIC CARD
                         BalanceCard()
                             .background(AppColors.cardWhite)
