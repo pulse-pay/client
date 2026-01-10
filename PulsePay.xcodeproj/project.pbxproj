@@ -29,9 +29,22 @@
 		590926F72F04608E009FB645 /* PulsePayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PulsePayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		590709BE2F12DFA600598A12 /* Exceptions for "PulsePay" folder in "PulsePay" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 590926DF2F04608C009FB645 /* PulsePay */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		590926E22F04608C009FB645 /* PulsePay */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				590709BE2F12DFA600598A12 /* Exceptions for "PulsePay" folder in "PulsePay" target */,
+			);
 			path = PulsePay;
 			sourceTree = "<group>";
 		};
@@ -400,6 +413,7 @@
 				DEVELOPMENT_TEAM = 97H55F9669;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PulsePay/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "PulsePay needs camera access to scan QR codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -433,6 +447,7 @@
 				DEVELOPMENT_TEAM = 97H55F9669;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PulsePay/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "PulsePay needs camera access to scan QR codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

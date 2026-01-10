@@ -8,6 +8,10 @@ struct SplashView: View {
     @State private var logoScale: CGFloat = 0.85
     @State private var opacity: Double = 0
 
+    // MARK: - Auth Presentation
+    @State private var showAuth = false
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
+
     // MARK: - BRAND CONFIG
     private let appName = "PulsePay"
     private let eventTagline = "On-Block 2026"
@@ -77,11 +81,23 @@ struct SplashView: View {
                 opacity = 1
             }
 
-            // ⏭️ MOVE TO HOME
+            // ⏭️ After splash, either go Home (if already logged in) or present Auth
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+                if isLoggedIn {
+                    showHome = true
+                } else {
+                    showAuth = true
+                }
+            }
+        }
+        // Full-screen authentication flow
+        .fullScreenCover(isPresented: $showAuth) {
+            AuthView { _ in
+                // Mark session as logged in and route to Home
+                isLoggedIn = true
+                showAuth = false
                 showHome = true
             }
         }
     }
 }
-
