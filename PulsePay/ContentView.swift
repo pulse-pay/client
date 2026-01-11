@@ -2,13 +2,13 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State private var showHome = false
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
 
     var body: some View {
-        if showHome {
+        if isLoggedIn {
             MainTabView()
         } else {
-            SplashView(showHome: $showHome)
+            SplashView()
         }
     }
 }

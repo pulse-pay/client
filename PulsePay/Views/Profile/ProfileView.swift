@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ProfileView: View {
 
+    @AppStorage("isLoggedIn") private var isLoggedIn = false
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -16,11 +18,8 @@ struct ProfileView: View {
                         // 👤 PROFILE HEADER
                         VStack(spacing: 12) {
                             ZStack {
-                                Circle()
-                                    .fill(AppColors.darkBG)
-
-                                Circle()
-                                    .fill(Color.white.opacity(0.08))
+                                Circle().fill(AppColors.darkBG)
+                                Circle().fill(Color.white.opacity(0.08))
 
                                 Image(systemName: "person.fill")
                                     .font(.system(size: 42))
@@ -38,48 +37,30 @@ struct ProfileView: View {
                         }
                         .padding(.top, 20)
 
-                        // 📋 PROFILE OPTIONS
+                        // 📋 OPTIONS
                         VStack(spacing: 16) {
-                            NavigationLink {
-                                PersonalInformationView()
-                            } label: {
+                            NavigationLink { PersonalInformationView() } label: {
                                 ProfileRow(icon: "person.circle", title: "Personal Information")
-                                    .contentShape(Rectangle())
                             }
 
-                            NavigationLink {
-                                SecurityPrivacyView()
-                            } label: {
+                            NavigationLink { SecurityPrivacyView() } label: {
                                 ProfileRow(icon: "lock.circle", title: "Security & Privacy")
-                                    .contentShape(Rectangle())
                             }
 
-                            NavigationLink {
-                                NotificationsView()
-                            } label: {
+                            NavigationLink { NotificationsView() } label: {
                                 ProfileRow(icon: "bell.circle", title: "Notifications")
-                                    .contentShape(Rectangle())
                             }
 
-                            NavigationLink {
-                                PaymentMethodsView()
-                            } label: {
+                            NavigationLink { PaymentMethodsView() } label: {
                                 ProfileRow(icon: "creditcard.circle", title: "Payment Methods")
-                                    .contentShape(Rectangle())
                             }
 
-                            NavigationLink {
-                                SettingsView()
-                            } label: {
+                            NavigationLink { SettingsView() } label: {
                                 ProfileRow(icon: "gearshape.circle", title: "Settings")
-                                    .contentShape(Rectangle())
                             }
 
-                            NavigationLink {
-                                HelpSupportView()
-                            } label: {
+                            NavigationLink { HelpSupportView() } label: {
                                 ProfileRow(icon: "questionmark.circle", title: "Help & Support")
-                                    .contentShape(Rectangle())
                             }
                         }
                         .buttonStyle(.plain)
@@ -87,10 +68,10 @@ struct ProfileView: View {
                         .background(Color.white.opacity(0.06))
                         .cornerRadius(20)
 
-                        // 🚪 LOGOUT SECTION (NOW CLEAR & VISIBLE)
+                        // 🚪 LOGOUT
                         VStack(spacing: 12) {
                             Button {
-                                // logout logic later
+                                logout()
                             } label: {
                                 Text("Log Out")
                                     .font(.headline)
@@ -107,15 +88,19 @@ struct ProfileView: View {
                         }
                         .padding(.top, 8)
 
-                        // ⬇️ EXTRA SPACE FOR SCROLL FEEL
                         Spacer(minLength: 40)
                     }
                     .padding(.horizontal)
-                    .padding(.bottom, 30) // 👈 allows scroll bounce & visibility
+                    .padding(.bottom, 30)
                 }
             }
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+
+    // MARK: - LOGOUT
+    private func logout() {
+        isLoggedIn = false   // ✅ Instantly returns to Splash → Login
     }
 }
